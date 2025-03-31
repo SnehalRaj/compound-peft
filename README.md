@@ -89,16 +89,4 @@ After running experiments, the scripts provide detailed analysis of the results,
 
 Results are saved in CSV format for further analysis.
 
-## Citation
 
-If you use this code in your research, please cite our work:
-
-```
-@inproceedings{
-  anonymous2024compoundadapters,
-  title={Compound Adapters: Parameter-Efficient Transfer Learning with Composable Adapters},
-  author={Anonymous},
-  booktitle={Under Review},
-  year={2024}
-}
-```
