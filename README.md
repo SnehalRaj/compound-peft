@@ -1,4 +1,4 @@
-# Compound Adapters 
+# Compound Adapters for GLUE and VTAB1K Benchmarks
 
 This repository contains implementations of Compound Adapters for natural language understanding and computer vision tasks. It includes code for running experiments on GLUE and VTAB1K datasets.
 
@@ -20,6 +20,57 @@ pandas
 matplotlib
 seaborn
 ```
+
+## Hyperparameters
+
+### GLUE Benchmark
+
+For GLUE experiments, we use the following hyperparameters:
+
+| Parameter | Value |
+|-----------|-------|
+| Base Model | DeBERTaV3-base |
+| Batch Size | 32-64 (varies by configuration) |
+| Learning Rate | ~7e-4 (task-specific, ranges from 2e-5 to 9e-4) |
+| Warmup Ratio | 0.06 |
+| Weight Decay | 0.01 |
+| Number of Epochs | 5-20 (varies by task and debug mode) |
+| Max Sequence Length | Task-specific (64-512) |
+
+GLUE tasks use different learning rates for optimal performance:
+- CoLA: ~4e-4
+- MRPC: ~8e-4 
+- RTE: ~3e-4
+- SST-2: ~2e-4
+- QNLI: ~2e-4
+- QQP: ~3e-4
+- STS-B: ~7e-4
+- MNLI: ~8e-5
+
+### VTAB1K Benchmark
+
+For VTAB1K experiments, we use the following hyperparameters:
+
+| Parameter | Value |
+|-----------|-------|
+| Base Model | DINOv2-large |
+| Batch Size | 16 |
+| Learning Rate | Task-specific (ranges from 2e-6 to 3e-3) |
+| Warmup Ratio | 0.1 |
+| Weight Decay | 0.02 |
+| Number of Epochs | 15-60 (varies by task) |
+| Dropout Rate | 0.1 |
+
+VTAB tasks use different learning rates for optimal performance:
+- CIFAR100: 8e-4
+- Caltech101: 5e-4 - 9e-4
+- DTD: 6e-4 - 1e-3
+- Flowers102: 1e-3 - 2e-3
+- Pets: 3e-4 - 8e-4
+- SVHN: 3e-3
+- EuroSAT: 6e-4 - 9e-4
+- Resisc45: 5e-4 - 1e-3
+- PatchCamelyon: 9e-4 - 4e-3
 
 ## GLUE Benchmark Experiments
 
@@ -75,6 +126,8 @@ You can modify the following parameters in the script:
 
 For both benchmarks, we run experiments with **3 different random seeds** and report the averaged performance metrics. This approach provides more reliable estimates of model performance and reduces variance due to random initialization.
 
+All experiments for GLUE tasks can be run on a single NVIDIA A100-SXM4-80GB GPU. Similarly, the VTAB1K experiments are designed to run on a single NVIDIA A100-SXM4-80GB GPU.
+
 Results include:
 - Mean and standard deviation of accuracy metrics
 - Detailed per-run performance statistics
@@ -88,5 +141,4 @@ After running experiments, the scripts provide detailed analysis of the results,
 - Efficiency analysis (performance vs. parameter count)
 
 Results are saved in CSV format for further analysis.
-
 
